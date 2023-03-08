@@ -1,0 +1,49 @@
+Saya:
+  test:
+    Disabled: false
+    Description:
+  api_a60_pic:
+    Disabled: false
+    Description:
+  api_apex_check:
+    Disabled: false
+    Description:
+  api_bing_gpt:
+    Disabled: false
+    Description:
+  api_news:
+    Disabled: false
+    Description:
+  api_picture:
+    Disabled: false
+    Description:
+  api_translate:
+    Disabled: false
+    Description:
+  api_weather:
+    Disabled: false
+    Description:
+  event_at:
+    Disabled: false
+    Description:
+  img_tank:
+    Disabled: false
+    Description:
+  message_crazy_tuesday:
+    Disabled: false
+    Description:
+  message_dic:
+    Disabled: false
+    Description:
+  message_help:
+    Disabled: false
+    Description:
+  message_nodog:
+    Disabled: false
+    Description:
+  message_nosleep:
+    Disabled: false
+    Description:
+  message_note:
+    Disabled: false
+    Description:
