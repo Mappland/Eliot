@@ -1,0 +1,27 @@
+Basic:
+  Mah:
+    BotNum: 123456789456
+    Http: http://localhost:8080
+    VerifyKey: 'verfiykey'
+    WebSocker: http://localhost:8080
+  Master: 123456789
+  PATH: /root/Eliot/
+Final: true
+Saya:
+  APEX_CHECK:
+    # api_url: https://portal.apexlegendsapi.com/
+    API: api_key
+  Tracemoe:
+    # api_rul: https://trace.moe/
+    API: api_key
+  Translate:
+    # api_url: https://fanyi.baidu.com/mtpe-individual/personal-center?channel=pcHeader
+    APP_CHAIN: chain
+    APP_ID: id
+  Weather:
+    # api_url https://dev.qweather.com/
+    KEY: key
+  api_a60_pic:
+    Interval: 20
+    Recall: false
+    san: r16

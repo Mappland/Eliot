@@ -3,7 +3,7 @@ from pathlib import Path
 from creart import create
 from graia.saya import Saya
 
-SAYA_CONFIGPATH=Path("/root/Eliot/config/saya.yaml")
+SAYA_CONFIGPATH=("./config/saya.yaml")
 saya = create(Saya)
 
 def write_saya():

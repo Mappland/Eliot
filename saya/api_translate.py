@@ -26,7 +26,7 @@ def translate_get(lan,tem):
     q = str(tem)
     api_url = f"https://fanyi-api.baidu.com/api/trans/vip/translate?"
     api_id = yaml_data["Saya"]["Translate"]["APP_ID"]
-    api_chain = yaml_data["Saya"]["Translate"]["APP_CHAIN"]
+    api_chain = yaml_data["Shttps://devapi.qweather.com/v7/weather/3d?aya"]["Translate"]["APP_CHAIN"]
     chain1 = str(api_id)+str(q)+str(1435660288)+str(api_chain)
     sign = hashlib.md5(chain1.encode('utf8')).hexdigest()
     ask = str(api_url)+"q="+str(q)+"&from=auto&to="+str(lan) + \

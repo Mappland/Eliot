@@ -52,7 +52,7 @@ async def weather(app: Ariadne, group: Group, city_zh: RegexResult):
         
 
         # 获得城市天气
-        url_weather = str(yaml_data["Saya"]["Weather"]["URL_WEATHER_3D"])+str("location=")+str(city_id)+str("&key=")+str(yaml_data["Saya"]["Weather"]["KEY"])
+        url_weather = str("https://devapi.qweather.com/v7/weather/3d?")+str("location=")+str(city_id)+str("&key=")+str(yaml_data["Saya"]["Weather"]["KEY"])
         async with httpx.AsyncClient() as client:
             r = await client.get(url_weather)
             url_send = r.json()["fxLink"]
