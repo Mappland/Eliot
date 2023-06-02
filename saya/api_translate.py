@@ -30,8 +30,8 @@ def translate_get(lan,tem):
     chain1 = str(api_id)+str(q)+str(1435660288)+str(api_chain)
     sign = hashlib.md5(chain1.encode('utf8')).hexdigest()
     ask = str(api_url)+"q="+str(q)+"&from=auto&to="+str(lan) + \
-         "&appid="+str(api_id)+"&salt=1435660288&sign="+str(sign)
-    return ask
+        "&appid="+str(api_id)+"&salt=1435660288&sign="+str(sign)
+    return str(ask)
 
 @channel.use(
     ListenerSchema(
@@ -55,17 +55,16 @@ async def translate(app: Ariadne, group: Group, lang: RegexResult, anything: Reg
         ))
 
     elif lang.matched and anything.matched:
-        ask=translate_get(str(lang.result),str(anything.result))
+        ask_url = translate_get(str(lang.result),str(anything.result))
         async with httpx.AsyncClient() as client:
-            r = await client.get(ask)
+            r = await client.get(ask_url)
             result = r.json()["trans_result"][0]["dst"]
         await app.send_message(group, MessageChain(
-            [Plain(f"翻译为：")],
-            result)
-        )
+            [Plain(f"翻译为：{result}")]))
+    
     elif lang.matched:
-        ask=translate_get(str("en"),str(lang.result))
+        ask_url = translate_get(str("en"),str(lang.result))
         async with httpx.AsyncClient() as client:
-            r=await client.get(ask)
+            r = await client.get(ask_url)
             result = r.json()["trans_result"][0]["dst"]
         await app.send_message(group,MessageChain([Plain(f"翻译为：{result}")]))

@@ -18,7 +18,7 @@ channel = Channel.current()
 
 master=yaml_data["Basic"]["Master"]
 #8点定时发送
-@channel.use(SchedulerSchema(crontabify("35 8 * * *")))
+@channel.use(SchedulerSchema(crontabify("33 8 * * *")))
 async def news_scheduled(app: Ariadne):
     await send(app)
 

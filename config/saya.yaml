@@ -1,7 +1,4 @@
 Saya:
-  test:
-    Disabled: false
-    Description:
   api_a60_pic:
     Disabled: false
     Description:
@@ -21,6 +18,9 @@ Saya:
     Disabled: false
     Description:
   api_weather:
+    Disabled: false
+    Description:
+  debug_ping:
     Disabled: false
     Description:
   event_at:

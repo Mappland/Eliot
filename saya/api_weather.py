@@ -13,11 +13,9 @@ from graia.ariadne.message.parser.twilight import (
     WildcardMatch
 )
 # 本文件实现引用
-import pinyin
 import httpx
 from config import yaml_data
 from saya.api_translate import translate_get
-
 channel = Channel.current()
 
 
@@ -25,42 +23,36 @@ channel = Channel.current()
     ListenerSchema(
         listening_events=[GroupMessage],
         inline_dispatchers=[
-            Twilight([FullMatch("/天气"), "anything" @ WildcardMatch()])],
+            Twilight([FullMatch("/天气"), "city_zh" @ WildcardMatch()])],
     )
 )
 
-async def weather(app: Ariadne, group: Group, anything: RegexResult):
-    if anything.matched:
-        tem=translate_get(str("en"),str(anything.result))
+async def weather(app: Ariadne, group: Group, city_zh: RegexResult):
+    if city_zh.matched:
+        # 地名中转英
+        tem = translate_get(str("en"),str(city_zh.result))
         async with httpx.AsyncClient() as client:
-            r = await  client.get(tem)
-            result = r.json()["trans_result"][0]["dst"]
+            recive_tran = await client.get(tem)
+            city_en = recive_tran.json()["trans_result"][0]["dst"]
+            city_en = str(city_en)
+        
         # 获得城市ID
-        city = str(result)
-        city_pinyin = str(pinyin.get(str(city), format='strip'))
-        # 请求URL生成
-        url_id_1 = yaml_data["Saya"]["Weather"]["URL_CITY_ID"]
-        key = yaml_data["Saya"]["Weather"]["KEY"]
-        url_id = str(url_id_1)+str("location=") + \
-            str(city_pinyin)+str("&key=")+str(key)
-        #print(url_id)
+        url_city_id = "https://geoapi.qweather.com/v2/city/lookup?location="+city_en+"&key="+str(yaml_data["Saya"]["Weather"]["KEY"])
         async with httpx.AsyncClient() as client:
-            r = await client.get(url_id)
+            r = await client.get(url_city_id)
             if r.json()["code"] == "404":
                 await app.send_message(group, MessageChain([Plain(f"暂未找到该地方，请尝试取消尾部的区，市等，外国地名或考虑用英文地名查询")]))
                 return
-            result = r.json()["location"][0]["id"]
+            city_id = r.json()["location"][0]["id"]
             country = r.json()["location"][0]["country"]+' '
             adm1 = r.json()["location"][0]["adm1"]+' '
             #print(len(r.json()["location"]))
             adm2 = r.json()["location"][0]["adm2"]+' '
             city_name = r.json()["location"][0]["name"]+' '
-            city_id = result
+        
+
         # 获得城市天气
-        # 请求URL生成
-        url_weather = str(yaml_data["Saya"]["Weather"]["URL_WEATHER_3D"])+str(
-            "location=")+str(city_id)+str("&key=")+str(yaml_data["Saya"]["Weather"]["KEY"])
-        print(url_weather)
+        url_weather = str(yaml_data["Saya"]["Weather"]["URL_WEATHER_3D"])+str("location=")+str(city_id)+str("&key=")+str(yaml_data["Saya"]["Weather"]["KEY"])
         async with httpx.AsyncClient() as client:
             r = await client.get(url_weather)
             url_send = r.json()["fxLink"]

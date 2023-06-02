@@ -1,33 +1,21 @@
 [tool.poetry]
 name = "eliot"
-version = "0.0.1"
+version = "0.1.0"
 description = ""
-authors = ["mappland"]
+authors = ["Mappland"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.11"
-graia-ariadne = {extras = ["standard"], version = "^0.10.0"}
-graiax-silkcoder = {extras = ["ffmpeg"], version = "^0.3.5"}
-ffmpeg = "^1.4"
-aiohttp = "^3.8.3"
-httpx = "^0.23.1"
-pyyaml = "^6.0"
-colorlog = "^6.7.0"
+graia-ariadne = {extras = ["standard"], version = "^0.11.5"}
+httpx = "^0.24.1"
 pinyin = "^0.4.0"
-pillow = "^9.4.0"
-numpy = "^1.24.2"
-edgegpt = "^0.0.48"
+pyyaml = "^6.0"
+pillow = "^9.5.0"
+numpy = "^1.24.3"
+graiax-silkcoder = {extras = ["libsndfile"], version = "^0.3.6"}
 
-
-[tool.poetry.group.dev.dependencies]
-autopep8 = "^2.0.0"
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
-
-[[tool.poetry.source]]
-name = "tuna-tsinghua"
-url = "https://pypi.tuna.tsinghua.edu.cn/simple"
-default = false
